@@ -1,9 +1,13 @@
 import urllib.request 
 import bs4
-
+ 
 # 경제속보 : 부동산 : 제목형
 
+<<<<<<< HEAD
 url = "https://news.naver.com/main/list.nhn?mode=LS2D&sid2=260&sid1=101&mid=sec&listType=title&date=20200730&page=1"
+=======
+url = "https://news.naver.com/main/list.nhn?mode=LS2D&sid2=260&sid1=101&mid=sec&listType=title&date=20200731&page=1"
+>>>>>>> bdad0f55b5230eeb9b89ffeccf12423f226a15d1
 
 html = urllib.request.urlopen(url)
 

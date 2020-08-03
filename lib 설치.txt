@@ -1,0 +1,3 @@
+import requests : pip install requests
+import win32clipboard : pip install pywin32
+# pip install pylint 
