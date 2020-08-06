@@ -1,12 +1,12 @@
-import urllib.request 
+import requests 
 import bs4
  
 # 경제속보 : 부동산 : 제목형
 
 url = "https://news.naver.com/main/list.nhn?mode=LS2D&sid2=260&sid1=101&mid=sec&listType=title&date=20200731&page=1"
 
-html = urllib.request.urlopen(url)
-
+html = requests.get(url)  # or requests.post(url)
+print(html.text)
 soup = bs4.BeautifulSoup(html, "html.parser")
 
 # print(soup.prettify())
