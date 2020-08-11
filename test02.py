@@ -12,7 +12,7 @@ values = {
 
 headers = {
     "Content-Type": "application/json",
-    "Accept": "application/json",
+    "Accept": "application/json"
 }
 
 data = json.dumps(values).encode("utf-8")
