@@ -16,6 +16,7 @@ class MyApp(QWidget):
         self.tb = QTextBrowser()
         self.tb.setAcceptRichText(True)
         self.tb.setOpenExternalLinks(True)
+        self.tb.setStyleSheet("background-color: blue;")
 
         self.clear_btn = QPushButton('Clear')
         self.clear_btn.pressed.connect(self.clear_text)
