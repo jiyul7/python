@@ -21,7 +21,8 @@ class yeonhapNews:
         list = body.findAll("li", {"class":"_rcount"})
 
         for li in list:
-            row = li.find("span", {"class":"date"}).text.strip() + ": " + li.find("a").text.strip()
+            # 날짜 앞에 년도 생략함
+            row = li.find("span", {"class":"date"}).text.strip()[5:] + ": " + li.find("a").text.strip()
             pagebodynews.append(row)
         return pagebodynews
 
@@ -45,24 +46,45 @@ class yeonhapNews:
         limit = soup.find("div", {"class":"paging paging_ytn"})
         limit = limit.findAll("a")  # list안에 <a> </a>, 들만 쌓이면 find() 사용할 필요없이 바로 tag.text로 출력
         bodyNewsUrl = []
-        page = 1
-        for a in limit:
-            if page > max:
-                break
-            bodyNewsUrl.append(a['href'])
-            page = page + 1
+        # max page 추출 (야간에는 1page만 있을 수 있음, 1개만 있을 경우 href가 없음. so limit가 empty)
+        #print("MAX:" + str(max))
+        maxpage = 0
+        if len(limit) == 0:
+            maxpage = 1
+            max = 1
+            bodyNewsUrl.insert(0,self.url + "&page=1")
+        else:    
+            for a in limit:
+                if a.text == "다음":
+                    break
+                else:
+                    maxpage = int(a.text)
+        
+            if maxpage < max:
+                max = maxpage
 
-        firstPage = bodyNewsUrl[0]
-        firstPage = firstPage.replace("page=2", "page=1")
-        bodyNewsUrl.insert(0,firstPage)
+            page = 1
+            #print("ahref cnt:" + str(len(limit)))
+            for a in limit:
+                if page >= (max+1):
+                    break
+                bodyNewsUrl.append(a['href'])
+                page = page + 1
+
+            firstPage = bodyNewsUrl[0]
+            firstPage = firstPage.replace("page=2", "page=1")
+            bodyNewsUrl.insert(0,firstPage)
 
         ################ Body news
         allBodyNews = []
 
+        print("bodyNewsUrl:" + str(len(bodyNewsUrl)))
+
         for url in bodyNewsUrl:
             allBodyNews = allBodyNews + self.getBodyNews(url)
 
-        allBodyNews.sort(reverse=True)
+        #allBodyNews.sort(reverse=True)
+        allBodyNews.sort()
         return allBodyNews
 
 # Robot = yeonhapNews()
