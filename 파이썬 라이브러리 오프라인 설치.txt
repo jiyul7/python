@@ -1,0 +1,20 @@
+# 파이썬 라이브러리 오프라인 설치
+
+1. 정확한 라이브러리 이름 찾기
+
+- https://pypi.org 에 가면 배포용 project 라이브러리 검색하여 이름을 찾을 수 있음
+예> https://pypi.org/project/Flask
+
+- 여기서 직접 다운 받을 수 있으나, 의존성 패키지는 생략되니, 이름만 찾을 것
+
+
+2. 다운로드 (인터넷 PC)
+
+- 다운 받을 디렉토리 만들고 나서, 다운로드
+- 예> pip download pandas -d ./pandas(만든 디렉토리명)  <-- 여기안에 의존 패키지 모두 다운받음
+- 모두 압축 후, 내부로 이동
+
+3. 설치
+- 압축 풀고, 해당 폴더로 이동 후,
+- pip install 패키지full명.whl -f ./ --no-index
+- 예> pip install pandas-2.2.1-cp311-cp311-win_amd64.whl -f ./ --no-index
